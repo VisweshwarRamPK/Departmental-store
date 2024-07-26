@@ -12,5 +12,5 @@ public class DepartmentalStoreApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DepartmentalStoreApplication.class, args);
 	}
-
+	//"hi"
 }
