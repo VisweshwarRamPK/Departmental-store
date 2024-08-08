@@ -5,7 +5,7 @@ import java.util.List;
 
 public enum Role {
     ADMIN(Arrays.asList(
-            Permissions.GRANT_ADMIN,
+
 
 
             Permissions.GET_LIST
@@ -16,7 +16,12 @@ public enum Role {
             Permissions.ADDCARTPRODUCTS
 
 
-    ));
+    )),SUPERADMIN(Arrays.asList( Permissions.GRANT_ADMIN,
+
+
+                 Permissions.GET_LIST)
+
+    );
     private List<Permissions> permissions;
     public List<Permissions> getPermissions(){
         return permissions;

@@ -1,4 +1,5 @@
 package com.viswa.DepartmentalStoreApplication.config;
+import com.viswa.DepartmentalStoreApplication.model.Permissions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityFilter {
@@ -36,9 +38,12 @@ public class SecurityFilter {
                     //  LOGIN OR REGISTER USER
                     authConfig.requestMatchers(HttpMethod.POST,"auth/registerAdmin").permitAll();
                     authConfig.requestMatchers(HttpMethod.POST,"auth/authenticate","auth/register").permitAll();
-
-
-
+                    authConfig.requestMatchers(HttpMethod.POST, "/auth/assign-role").hasAuthority(Permissions.ASSIGN_ROLE.name());
+                    authConfig.requestMatchers(HttpMethod.POST, "/create_product").hasAuthority(Permissions.GET_LIST.name());
+                    authConfig.requestMatchers(HttpMethod.POST, "/getAllproducts").hasAuthority(Permissions.GET_LIST.name());
+                    authConfig.requestMatchers(HttpMethod.POST, "/updateproducts").hasAuthority(Permissions.GET_LIST.name());
+                    authConfig.requestMatchers(HttpMethod.POST, "/deleteproducts").hasAuthority(Permissions.GET_LIST.name());
+                    authConfig.requestMatchers(HttpMethod.POST, "/AddCartProducts").hasAuthority(Permissions.ADDCARTPRODUCTS.name());
 
 
 

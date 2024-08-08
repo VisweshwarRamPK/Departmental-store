@@ -24,12 +24,16 @@ public class AuthenticationController {
     public AuthenticationController(AuthenticationService authenticationService) {
         this.authenticationService = authenticationService;
     }
+
+    @Hidden
     @Operation( security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/registerAdmin")
     public ResponseEntity<ReturnStatus> registerAdmin(@RequestBody AuthenticationRequest userDetails) {
         String message= authenticationService.Register(userDetails,"SA");
         return ResponseEntity.ok(new ReturnStatus("Success",message));
-    }@Operation( security = @SecurityRequirement(name = "bearerAuth"))
+    }
+
+    @Operation( security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/register")
     public ResponseEntity<RegistrationResponse> register(@RequestBody AuthenticationRequest request) {
         try {
@@ -41,7 +45,9 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new RegistrationResponse("Error occurred during registration"));
         }
-    }@Operation( security = @SecurityRequirement(name = "bearerAuth"))
+    }
+
+    @Operation( security = @SecurityRequirement(name = "bearerAuth"))
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticate(@RequestBody AuthenticationRequest request){
         String authResponse=null;
@@ -53,5 +59,11 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Invalid Username or Password");
         }
 
+    }
+    @Operation( security = @SecurityRequirement(name = "bearerAuth"))
+    @PostMapping("/assign-role")
+    public ResponseEntity<String> assignRole(@RequestBody AuthenticationRequest request) {
+        String result = authenticationService.Register(request,"A");
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

@@ -3,5 +3,6 @@ package com.viswa.DepartmentalStoreApplication.model;
 public enum Permissions {
     GET_LIST,
     GRANT_ADMIN,
-    ADDCARTPRODUCTS;
+    ADDCARTPRODUCTS,
+    ASSIGN_ROLE;
 }

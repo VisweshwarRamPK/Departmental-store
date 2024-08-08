@@ -22,5 +22,4 @@ public class Product {
     private double price;
     private Date stockArrivedDate;
     private double mrp;
-
 }
